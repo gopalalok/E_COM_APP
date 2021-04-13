@@ -143,4 +143,4 @@ EMAIL_HOST_USER = 'gd2088@cse.jgec.ac.in'
 EMAIL_HOST_PASSWORD = 'Gopaldas0#'
 
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
