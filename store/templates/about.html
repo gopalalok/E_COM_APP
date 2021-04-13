@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% load static %}
+<style>
+    .box-me{
+    width: 400px;
+    
+    margin:0 auto;
+    position: relative;
+    perspective: 1000px;
+}
+.box-me .box-me-img{
+    transform: rotateY(0);
+    transition:all 0.5s ease-in-out 0s;
+}
+.box-me .box-me-img img{
+    width: 100%;
+    height: auto;
+}
+.box-me:hover .box-me-img{
+    transform: rotateY(-90deg);
+}
+.box-me .box-me-content{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #fff;
+    background: rgba(0,0,0,0.7);
+    transform: rotateY(90deg);
+    transition:all 0.5s ease-in-out 0s;
+}
+.box-me:hover .box-me-content{
+    transform: rotateY(0deg);
+}
+.box-me .box-me-link a i{
+    padding:10px;
+}
+</style>
+
+    
+    <div class="content-section ml-auto mr-auto  col-md-6  p-5">
+        <div class="box-me">
+            <div class="box-me-img">
+                <img src="{% static 'store/images/me.jpg' %}"/>
+            </div>
+            <div class="box-me-content">
+                <h3>Gopal Das</h3>
+                <h5>Student of Computer Science</h5>
+                <p>gdas64682@gmail.com</p>
+                <p>I have completed my B.Tech from Jalpaiguri Government Engineering College.</p>
+                <div class="box-me-link">
+                <a href="https://www.linkedin.com/in/gopal-das-88024a189/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/channel/UCos_LgAP5yD0hu1pwvjLGtg" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/gopalalok" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+{% endblock %}

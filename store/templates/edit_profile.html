@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load custom_filter %}
+<div class="row py-5 px-4">
+    <div class="col-md-5 mx-auto">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3"><img height="120px" width="100px" src="{{image.url}}"></div>
+                    
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Photos</small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Followers</small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">340</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Following</small>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 m-2">
+
+                    <form action="/update_profile" method="POST" enctype="multipart/form-data">
+                        
+                        {% csrf_token %}
+        
+                        {% if error%}
+                        <div class="alert alert-danger" role="alert">
+                            {{error}}
+                        </div>
+                        {% endif %}
+                        <!-- firstname -->
+                        <div class="form-group">
+                            <label for="">*First Name</label>
+                            <input type="text" name="firstname"
+                             id="" value="{{first_name}}" class="form-control form-control-sm" 
+                             placeholder="">
+                        </div>
+        
+                        <!-- last name -->
+                        <div class="form-group">
+                            <label for="">*Last Name</label>
+                            <input type="text" name="lastname" 
+                            id="" value="{{last_name}}" class="form-control form-control-sm"
+                            >
+                        </div>
+        
+                        <!-- phone -->
+                        <div class="form-group">
+                            <label for="">*Phone</label>
+                            <input type="text" name="phone" 
+                            id="" class="form-control form-control-sm"
+                            value="{{phone}}"
+                            placeholder="565698959"
+                            >
+                        </div>
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for="">*Email</label>
+                            <input required type="email" name="email" id=""
+                            value="{{email}}" 
+                            class=" form-control-sm form-control" placeholder="example@gmail.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <legend class="col-form-label ">Gender:</legend>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" {% if gender == "Male" %}checked{% endif %} type="radio" name="gender" id="inlineRadio1" value="Male">
+                                <label class="form-check-label" for="inlineRadio1">Male</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" {% if gender == "Female" %}checked{% endif %} type="radio" name="gender" id="inlineRadio2" value="Female">
+                                <label class="form-check-label" for="inlineRadio2">Female</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" {% if gender == "Others" %}checked{% endif %} type="radio" name="gender" id="inlineRadio3" value="Others">
+                                <label class="form-check-label" for="inlineRadio3">Others</label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <legend class="col-form-label ">Hobbies:</legend>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" {% if 'Cricket' in hobbies %}checked{% endif %} name="hobbies" type="checkbox" id="inlineCheckbox1" value="Cricket">
+                                <label class="form-check-label" for="inlineCheckbox1">Cricket</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" {% if 'Football' in hobbies %}checked{% endif %} name="hobbies" type="checkbox" id="inlineCheckbox2" value="Football">
+                                <label class="form-check-label" for="inlineCheckbox2">Football</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" {% if 'Tour' in hobbies %}checked{% endif %} name="hobbies" type="checkbox" id="inlineCheckbox3" value="Tour">
+                                <label class="form-check-label" for="inlineCheckbox3">Tour</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" {% if 'Lecture' in hobbies %}checked{% endif %} name="hobbies" type="checkbox" id="inlineCheckbox3" value="Lecture">
+                                <label class="form-check-label" for="inlineCheckbox3">Lecture</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Image:</label>
+                            <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                        
+                        <hr>
+                        <div class="form-group">
+                            <input class="btn btn-sm btn-info" type="submit" value="Update Your Account ">
+                        </div>
+                        
+                        
+                    </form>
+               
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart %}
+{% block title%} My Awesome Cart Tracker{% endblock %}
+{% block content %}
+<main role="main" class="container">
+    <div class="row ">
+      <div class="mx-auto col-md-10">
+        
+        <div class="content-section p-5 drop-shadow">
+            <div class="text-center col">
+                
+            <img 
+                src="{% static 'store/images/shopping-bag-cart-with-laptop-online-shopping-delivery.jpg' %}" alt=""
+                class="" style="height: 150px;">
+            <!-- <hr> -->
+            <h2>Redirecting you to the merchant....</h2>
+            <h3>Please do not refresh your page....</h3>
+                <form action="https://securegw-stage.paytm.in/theia/processTransaction" method="post" name="paytm">
+                    {% for key, value in param_dict.items %}
+                    <input type="hidden" name="{{key}}" value="{{value}}">
+                    {% endfor %}
+
+                </form>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+<script>
+document.paytm.submit()
+</script>
+</main>
+{% endblock %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paytm merchant payment page</title>
+</head>
+<body>
+<h1>Redirecting you to the merchant....</h1>
+<h1>Please do not refresh your page....</h1>
+<form action="https://securegw-stage.paytm.in/theia/processTransaction" method="post" name="paytm">
+    {% for key, value in param_dict.items %}
+    <input type="hidden" name="{{key}}" value="{{value}}">
+    {% endfor %}
+
+</form>
+</body>
+<script>
+document.paytm.submit()
+</script>
+</html>

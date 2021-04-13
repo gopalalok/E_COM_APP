@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% load static %}
+
+
+    
+    
+
+        
+        <div class="content-section ml-auto mr-auto  col-md-6 border border-success p-5">
+            <div class="text-center">
+            
+                <img 
+                src="{% static 'store/images/shopping-bag-cart-with-laptop-online-shopping-delivery.jpg' %}" alt=""
+                class="" style="height: 150px;">
+            <!-- <hr> -->
+            <div class="display-8">Create An Account</div>
+            <hr>
+            </div>
+            <h3 hidden class="alert alert-light border rounded">Create An Account</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+                </small>
+            </div>
+        </div>
+    
+
+
+{% endblock %}

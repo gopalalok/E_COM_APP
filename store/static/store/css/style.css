@@ -1,0 +1,273 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+nav{
+  background-color: #131921;
+  padding-top: 0px;
+  position: fixed;
+}
+
+.display-8{
+  font-weight: 200;
+  font-size: 30px;
+}
+
+.search-box{
+  margin-right: 100px;
+}
+.search-box input[type=text]{
+  width:420px !important;
+}
+.search-changeStyle{
+  margin-left: 100px;
+  margin-right: 50px;
+}
+.menudropdown{
+    height: 350px;
+    width: 100%;
+    margin: 0px auto;
+    z-index: 10;
+    position: relative;
+    top: 0px;
+    display: block;
+    background: #232F3E;
+    padding: 0px 50px;
+    line-height: 0px;
+    display:inline-block;
+    }
+    .menudropdown ul{
+      padding: 0px;
+      text-align: center;
+    }
+    .menudropdown ul li{
+      float: left;
+      color: white;
+      width: 200px;
+      list-style: none;
+      height: 35px;
+      line-height: 35px;
+      opacity: 0.7;
+      text-align: center;
+      background: #232F3E;
+    }
+    .menudropdown ul li ul{
+      display: none;
+    }
+    .menudropdown ul li:hover > ul{
+      display: block;
+    }
+    .menudropdown ul li:hover{
+      background: green;
+      opacity: 0.9;
+    }
+    .menudropdown ul li ul li{
+      position: relative;
+    }
+    .menudropdown ul li ul li ul{
+      position: absolute;
+      left: 200px;
+      top: 0px;
+    }
+
+
+.navbar{
+  box-shadow: 0px 8px 8px -6px rgba(0,0,0,.5);
+  }
+.area{
+  margin: 0px;
+  padding: 0px;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  color: black;
+}
+.menu-area{
+  position: static;
+}
+.mega-area{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 15px;
+}
+.dropdown-item{
+  padding: 5px 0;
+}
+h5{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: black;
+}
+.navbar{
+  margin-top: 2px;
+}
+.nav-2 .navbar-nav .nav-item .nav-link{
+  font-size: 18px;
+  font-weight: 700px;
+  color: black;
+}
+
+.navbar-nav .nav-item .nav-link:hover{
+  color: #004d00;
+}
+@media (max-width:1300px){
+  .search-changeStyle{
+    margin-left: 50px;
+    margin-right: 20px;
+  }
+@media (max-width:990px){
+  .navbar-nav .nav-item .nav-link:hover{
+    color: chartreuse;
+  }
+  .navbar-nav .nav-item .nav-link:hover{
+    border-bottom: none;
+  }
+  .search-changeStyle{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+.dropdown-box{
+  margin-left: 100px;
+  display: flex;
+}
+
+/*profile*/
+.profile-head {
+  transform: translateY(5rem)
+}
+
+.cover {
+  background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+  background-size: cover;
+  background-repeat: no-repeat
+}
+
+body {
+  background: #fff;
+  min-height: 100vh
+}
+
+/***Search Page ***/
+.search-result-categories>li>a {
+  color: #b6b6b6;
+  font-weight: 400
+}
+
+.search-result-categories>li>a:hover {
+  background-color: #ddd;
+  color: #555
+}
+
+.search-result-categories>li>a>.glyphicon {
+  margin-right: 5px
+}
+
+.search-result-categories>li>a>.badge {
+  float: right
+}
+
+.search-results-count {
+  margin-top: 10px
+}
+
+.search-result-item {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 4px
+}
+
+.search-result-item:after,
+.search-result-item:before {
+  content: " ";
+  display: table
+}
+
+.search-result-item:after {
+  clear: both
+}
+
+.search-result-item .image-link {
+  display: block;
+  overflow: hidden;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px
+}
+
+@media (min-width:768px) {
+  .search-result-item .image-link {
+      display: inline-block;
+      margin: -20px 0 -20px -20px;
+      float: left;
+      width: 200px
+  }
+}
+
+
+@media (max-width:767px) {
+  .search-result-item .image-link {
+      max-height: 200px
+  }
+  .search-changeStyle{
+    margin-left: 0px;
+    margin-right: 100px;
+  }
+}
+
+
+.search-result-item .image {
+  max-width: 100%
+}
+
+.search-result-item .info {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #999
+}
+
+.search-result-item .description {
+  font-size: 13px
+}
+
+.search-result-item+.search-result-item {
+  margin-top: 20px
+}
+
+@media (min-width:768px) {
+  .search-result-item-body {
+      margin-left: 200px
+  }
+}
+
+.search-result-item-heading {
+  font-weight: 400
+}
+
+.search-result-item-heading>a {
+  color: #555
+}
+
+@media (min-width:768px) {
+  .search-result-item-heading {
+      margin: 0
+  }
+}
+
+.subcategory_style a{
+  color: green;
+}
+.subcategory_style a:hover{
+  color: #007BFF;
+}
+
+.drop-shadow {
+  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+}
+.container.drop-shadow {
+  padding-left:0;
+  padding-right:0;
+}

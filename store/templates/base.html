@@ -1,0 +1,198 @@
+<!doctype html>
+{% load static %}
+{% load custom_filter %}
+<html lang="en">
+
+<head>
+  
+  <!-- Required meta tags -->
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link href="{% static 'store/css/style.css' %}" rel="stylesheet" type="text/css" >
+    
+    
+  <title>Easy Shop</title>
+  <link rel = "icon" class="fas fa-bags-shopping" href =  
+  "{% static 'store/images/shopping-bag-cart-with-laptop-online-shopping-delivery.jpg' %}" 
+          type = "image/x-icon"> 
+  <style>
+        
+    .slideshow{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  #slideimage{
+    width: 100%;
+    height: 100%;
+  }
+
+  
+  
+  </style>
+  
+
+
+</head>
+
+<body>
+
+  <!-- navbar -->
+
+  <nav class="changeStyle one-edge-shadow 
+  sticky-top navbar 
+  navbar-expand-lg navbar-dark fixed-top bg-primary mt-0">
+  <a class="navbar-brand ml-md-5" href="/"><img height="30px" width="100px" src="{% static 'store/images/easyshop3.png' %}"></a>
+ 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="nav-link aboutme" style="color:#ccff66" href="/about">about me<span class="sr-only">(current)</span></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      <div class="search-box">
+      <form method="GET" action="/search" class="form-inline search-changeStyle " >
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="query" id="query">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+      <ul class="navbar-nav my-2 my-lg-0">
+        <li class="nav-item ">
+          <a class="nav-link" href="/cart"><i class="fas fa-shopping-cart"></i>Cart 
+            <span class="badge badge-info">{{request.session.cart.keys|length }}</span>
+            <span class="sr-only">(current)</span></a>
+        </li>
+        {% if user.is_authenticated %}
+        
+        <li class="nav-item ">
+          <a class="nav-link" href="/orders">Orders<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/profile">Profile<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+        </li>
+        {% else %}
+        <li class="nav-item ">
+          <a class="nav-link" href="/signup">Signup<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/login">Login<span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </nav>
+  
+      <div class="row">
+            <div class="col-lg-12">
+              <nav class="navbar navbar-expand-lg nav-2  mt-0 pt-0" style="background-color: #fff">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                </button>    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                  {% for category in categories %}
+                  <ul class="navbar-nav m-auto">  
+                    <li class="nav-item dropdown menu-area">
+                      <a class="nav-link dropdown-toggle" href="#" id="mega-one" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{category.name}}
+                      </a>
+                      
+                        <div class="dropdown-menu mega-area" aria-labelledby="mega-one">
+                            <div class="row ml-5">
+                              {% for subcategory in subcategories %}
+                                {% if subcategory.category == category %}
+                                <div class="col-sm-6 col-lg-3 subcategory_style" style="line-height: 25px;">      
+                                    <a href="#" class="dropdown-item">{{subcategory.name}}</a> 
+                                </div>
+                                
+                                {% endif %}
+                              {% endfor %}
+                                
+                            </div>   
+                        </div>
+                        
+                    </li>
+                      
+                  </ul>
+                {% endfor %}  
+                </div>
+              </nav>
+            </div>
+          </div>
+
+          <main role="main" class="container-fluid mx-auto">
+            <div class="row">
+              <div class="col-md-12">
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mt-5 col-md-6 mx-auto">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+                {% block content %}{% endblock %}
+              </div>
+            </div>  
+            
+          </main>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <script>
+  
+      var images = [
+      "{% static 'store/images/slide1.jpg' %}",
+      "{% static 'store/images/slide2.jpg' %}",
+      "{% static 'store/images/slide3.jpg' %}",
+      "{% static 'store/images/slide4.jpg' %}",
+      "{% static 'store/images/slide5.jpg' %}",
+      "{% static 'store/images/slide6.jpg' %}",
+      "{% static 'store/images/slide7.jpg' %}",
+      "{% static 'store/images/slide8.jpg' %}"
+      
+      ]
+      var i =0;
+      function slides(){
+        document.getElementById("slideimage").src = images[i];
+        if(i<(images.length-1))
+        {
+          i++;
+        }
+        else{
+          i = 0;
+        }
+      }
+    
+      setInterval(slides,4000)
+        
+    </script>
+</body>
+
+</html>

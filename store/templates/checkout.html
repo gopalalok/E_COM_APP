@@ -1,0 +1,88 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main role="main" class="container">
+    <div class="row ">
+      <div class="mx-auto col-md-6">
+        
+        <div class="content-section p-5 drop-shadow">
+            <div class="text-center col">
+                
+                <img 
+                src="{% static 'store/images/shopping-bag-cart-with-laptop-online-shopping-delivery.jpg' %}" alt=""
+                class="" style="height: 150px;">
+            <!-- <hr> -->
+            <div class="display-8">Please complete all task</div>
+            <hr>
+            </div>
+            <form action="/checkout" method="POST">
+                {% csrf_token %}
+                {% if error%}
+                  <div class="alert alert-danger" role="alert">
+                {{error}}
+                </div>
+                {% endif %}
+                <div class="form-group">
+                  <legend class="col-form-label"><h5>Select a payment method</h5></legend>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="payment" {% if values.payment == "paytm" %}checked{% endif %} id="inlineRadio1" value="online">
+                      <label class="form-check-label" for="inlineRadio1">Online(Paytm, Credit Card, Debit Card, Net Banking)</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="payment" {% if values.payment == "cod" %}checked{% endif %} id="inlineRadio2" value="cod">
+                      <label class="form-check-label" for="inlineRadio2">Pay on Delivery</label>
+                    </div>
+            
+              </div>
+              <hr>
+              <legend class="col-form-label"><h5>Shipping Address</h5></legend>
+                <div class="form-group">
+                  <label for="">Full name (First and Last name)</label>
+                  <input type="text" required name="fullname" value="{{values.fullname}}" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label for="">Mobile number</label>
+                    <input type="text" required name="mobilenumber" value="{{values.mobilenumber}}" id="" class="form-control" placeholder="10-digit mobile number without prefix" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                  <label for="">PIN code</label>
+                  <input type="text" required name="pincode" value="{{values.pincode}}" id="" class="form-control" placeholder="6 digits [0-9] PIN code" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                  <label for="">Flat, House no., Building, Company, Apartment</label>
+                  <input type="text" required name="flat" id="" value="{{values.flat}}" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                  <label for="">Area, Colony, Street, Sector, Village</label>
+                  <input type="text" required name="area" id="" value="{{values.area}}" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                  <label for="">Landmark</label>
+                  <input type="text" required name="landmark" id="" value="{{values.landmark}}" class="form-control" placeholder="E.g. Near AIIMS Flyover, Behind Regal Cinema, etc" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                  <label for="">Town/City</label>
+                  <input type="text" required name="city" id="" value="{{values.city}}" class="form-control" placeholder="" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                  <label for="">State:</label>
+                  <select class="custom-select" name="state" required>
+                    <option selected disabled>Select</option>
+                    <option value="Assam" {% if values.state == "Assam" %}selected{% endif %}>Assam</option>
+                    <option value="Bihar" {% if values.state == "Bihar" %}selected{% endif %}>Bihar</option>
+                    <option value="Sikkim" {% if values.state == "Sikkim" %}selected{% endif %}>Sikkim</option>
+                    <option value="Uttar Pradesh" {% if values.state == "Uttar Pradesh" %}selected{% endif %}>Uttar Pradesh</option>
+                    <option value="Kerala" {% if values.state == "Kerala" %}selected{% endif %}>Kerala</option>
+                    <option value="West Bengal" {% if values.state == "West Bengal" %}selected{% endif %}>West Bengal</option>
+                  </select>
+                </div>
+                <input type="submit" class="btn float-right btn-outline-info col-lg-6" value="Check Out">
+            </form>
+            
+        </div>
+    </div>
+</main>
+    
+{% endblock content %}
+

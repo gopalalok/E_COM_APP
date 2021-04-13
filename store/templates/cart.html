@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load cart %}
+{% load custom_filter %}
+<div class="container">
+    
+    <div class="border rounded p-4 m-4">
+        {% if products %}
+        <p class="display-4 pl-4 ml-4 text-center">Your Shopping Cart</p>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sno</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ forloop.counter}}</td>
+                    <td>{{product.name}}</td>
+                    <td><img style="height: 80px;" class="rounder-circle" src="{{product.image.url}}"/></td>
+                    <td>{{product.price|currency}}</td>
+                    <td>{{product|cart_quantity:request.session.cart }}</td>
+                    <td>{{product|price_total:request.session.cart|currency }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th colspan="3"></th>
+                    <th class="text-center">Subtotal</th>
+                    <th>{{products|total_cart_price:request.session.cart|currency }}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <hr>
+        <div class="m-3 p-3">
+            <a href="\checkout"  class="btn btn-warning border col-lg-2 float-right">Proceed to Buy</a>
+        </div>
+        {% else %}
+        <div class="text-center col mt-5">
+                
+            <img src="{% static 'store/images/cart_empty.png' %}" class="" style="height: 200px;">
+        <!-- <hr> -->
+            <p style="font-size: 25px;">Your cart is empty!</p>
+            <p>Add items to it now.</p>
+            <div class="p-3">
+                <a href="\"  class="btn bg-primary text-white border col-lg-2 ">Shop now</a>
+            </div>
+        {% endif %}
+        
+        
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+  
+  <!-- Modal -->
+  
+  
+{% endblock %}

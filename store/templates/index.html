@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% load cart %}
+{% load custom_filter %}
+<!-- body -->
+<div class="container-fluid mt-3">
+	<div class="row">
+
+
+		<!-- filter -->
+	<!---
+		<div class="col-lg-3 mx-auto">
+			<div class="list-group">
+
+				<a href="/" class="list-group-item list-group-item-action">All Products</a>
+
+				{% for category in categories %}
+				<a href="/?category={{category.id}}"
+					class="list-group-item list-group-item-action">{{category.name}}</a>
+				{% endfor %}
+			</div>
+		</div>
+	-->
+		<!-- all products -->
+		<div class="slideshow">
+			<img src="{% static 'store/images/slide1.jpg' %}" id="slideimage">
+			
+		  </div>
+		<div id='products' class="col-lg-12 mx-auto">
+			<div class="row mx-auto">
+				{% for product in page_obj %}
+				<div class="hover-effect card col-lg-2  col-md-3 col-sm-4 mr-1 mb-3 mx-auto btn-outline-primary" id={{product.id}} >
+					
+					<img height="100px"  class="card-img-top pl-4 pr-4 pt-2" src="{{product.image.url}}" alt="Card image cap">
+					
+					<div class="card-body text-center">
+						<p class="card-title">{{product.name}}</p>
+						<p class="card-text"><b>{{product.price|currency}}</b></p>
+						<!-- {{product | is_in_cart:request.session.cart }} -->
+					</div>
+
+					<div class="card-footer p-0 ">
+
+						{% if product|is_in_cart:request.session.cart %}
+						<div class="row no-gutters p-0">
+							<form action="/#{{product.id}}" class="col-2 " method="post">
+								{% csrf_token %}
+								<input hidden type="text" name='product' value='{{product.id}}'>
+								<input hidden type="text" name='remove' value='True'>
+								<input type="submit" value=" - " class="btn btn-block btn-success border-right">
+							</form>
+							<div class="text-center col">{{product|cart_quantity:request.session.cart}} in Cart</div>
+							<form action="/#{{product.id}}" class="col-2 " method="post">
+								{% csrf_token %}
+								<input hidden type="text" name='product' value='{{product.id}}'>
+								<input type="submit" value=" + " class="btn btn-block btn-warning border-left">
+							</form>
+						</div>
+						{% else %}
+						<form action="/#{{product.id}}" method="POST" class="btn-block">
+							{% csrf_token %}
+							<input hidden type="text" name='product' value='{{product.id}}'>
+							<input type="submit" class="float-right btn btn-dark  form-control"
+								value="Add To Cart">
+						</form>
+						{% endif %}
+
+					</div>
+
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+		{% if page_obj %}
+		<div class="text-align-center mx-auto">
+			<ul class="pagination pagination-sm">
+				
+				{% if page_obj.has_previous %}
+					<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+					<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+				{% endif %}
+				
+				{% for num in page_obj.paginator.page_range %}
+					{% if page_obj.number == num %}
+					<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+					{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+					<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+					{% endif %}
+				{% endfor %}
+		
+				  {% if page_obj.has_next %}
+					<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+					<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+				{% endif %}
+				
+			</ul>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load cart %}
+{% load static %}
+{% load custom_filter %}
+<div class="container">
+    <div class="border rounded p-4 m-4">
+        {% if orders %}
+        <p class="display-4 pl-4 ml-4 text-center">Your Shopping Order</p>
+        <hr>
+        {% for allorder in orderidmerge %}
+        <td><b>Date: </b>{{allorder.dtime.date}}  <b>Time:</b>{{allorder.dtime.time}}    </td>
+        <table class="table">
+            <thead>
+                <tr style="text-align: center;">
+                    <th style="width: 3%;">Sno</th>
+                    <th style="width: 30%; ">Name</th>
+                    <th style="width: 30%; ">Image</th>
+                    <th style="width: 10%;">Price</th>
+                    <th style="width: 3%;">Quantity</th>
+                    <th style="width: 8%;">Total</th>
+                    <th style="width: 8%;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for porder in allorder.orderid|listorderid_filter %}
+                    {% for order in orders %}
+                    {% if porder|orderid_filter == order %}
+                    <tr style="text-align: center;">
+                        <td style="width: 3%;">{{ forloop.counter}}</td>
+                        <td style="width: 30%;">{{order.product.name}}</td>
+                        <td style="width: 30%;"><img height="80px" class="rounder-circle" src="{{order.product.image.url}}"/></td>
+                        
+                        <td style="width: 10%;">{{order.price|currency}}</td>
+                        <td style="width: 3%;">{{order.quantity}}</td>
+                        <td style="width: 8%;">{{order.quantity|multiply:order.price|currency }}</td>
+                        {% if order.status %}
+                        <td style="width: 8%;"><small class="badge badge-success">Completed</small></td>
+                        {% else %}
+                        <td style="width: 8%;"><small class="badge badge-warning">Pending</small></td>
+                        {% endif %}
+                        
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    
+                {% endfor %}    
+                
+            </tbody>
+
+            <tfoot>
+                
+            </tfoot>
+        </table>
+        {% endfor %}
+        <hr>
+        {% else %}
+        <div class="text-center col mt-5">
+        <img src="{% static 'store/images/my_account_empty_states.png' %}" class="" style="height: 200px;">
+        <!-- <hr> -->
+            <p style="font-size: 25px;">You have not purchases!</p>
+            <p>Add items to it now.</p>
+            <div class="p-3">
+                <a href="\"  class="btn bg-primary text-white border col-lg-2 ">Shop now</a>
+            </div>
+        </div>
+        {% endif %}
+        
+    </div>
+</div>
+
+
+{% endblock %}
