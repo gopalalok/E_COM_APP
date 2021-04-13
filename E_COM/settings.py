@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '8$6h-$o#wao1gka7(wfx&4b@&^=8rv7glqgw&lbm$wdc$fxuf^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -124,7 +124,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 MEDIA_URL = "/image/download/"
 MEDIA_ROOT = BASE_DIR
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_URL = 'login'
