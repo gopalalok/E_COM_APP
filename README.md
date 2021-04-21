@@ -1,1 +1,1 @@
-# E_COM_APP
+ # Django E-commerce
